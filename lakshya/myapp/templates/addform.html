@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LakshyaIn</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      
+      .job-card {
+        transition: box-shadow 150ms ease, transform 150ms ease;
+      }
+      
+      .job-card:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+
+  <body class="bg-slate-50 text-slate-800">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="{% url 'home' %}" class="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <span class="material-icons-outlined text-indigo-600">work</span>
+          LakshyaIn
+        </a>
+      </div>
+    </header>
+
+    <main class="min-h-screen bg-gray-100 py-12 px-4">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-600 px-8 py-2">
+          <h1 class="text-3xl font-bold text-white">Create New Job</h1>
+          <p class="text-indigo-600 mt-2">Fill in the details below to publish a new job opening.</p>
+        </div>
+
+        <!-- Form -->
+        <form action="{% url 'createjob' %}" method="POST" enctype="multipart/form-data" class="p-8 space-y-2">
+          {% csrf_token %}
+
+          <!-- Job Title -->
+          <div>
+            <label for="title" class="block text-sm font-semibold text-gray-700 mb-2">Job Title</label>
+
+            <input type="text" name="title" id="title" placeholder="e.g. Frontend Developer" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+          </div>
+
+          <!-- Two Columns -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Company -->
+            <div>
+              <label for="companyName" class="block text-sm font-semibold text-gray-700 mb-2">Company Name</label>
+
+              <input type="text" name="companyName" id="companyName" placeholder="Google Pvt Ltd" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+            </div>
+
+            <!-- Location -->
+            <div>
+              <label for="location" class="block text-sm font-semibold text-gray-700 mb-2">Location</label>
+
+              <input type="text" name="location" id="location" placeholder="Bangalore, India" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+            </div>
+          </div>
+
+          <!-- Salary -->
+          <div>
+            <label for="salary" class="block text-sm font-semibold text-gray-700 mb-2">Annual Salary (₹)</label>
+
+            <input type="number" name="salary" id="salary" placeholder="800000" class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" />
+          </div>
+          <div>
+            <label for="logo" class="block text-sm font-semibold text-gray-700 mb-2">Company Logo</label>
+
+            <input type="file" name="logo" id="logo" accept="image/*" class="w-full rounded-xl border border-gray-300 px-4 py-3" />
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center justify-end gap-4 pt-4">
+            <button type="reset" class="px-6 py-3 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition">Reset</button>
+
+            <button type="submit" class="px-8 py-3 rounded-xl bg-black text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition duration-300">Publish Job</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
