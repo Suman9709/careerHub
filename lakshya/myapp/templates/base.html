@@ -37,22 +37,36 @@
     {% block navbar %}
       <div class="navbar bg-base-100 shadow-sm">
         <div class="flex-1">
-          <a class="btn btn-ghost text-xl">CareerHub</a>
+          <a href="{% url 'home' %}" class="btn btn-ghost text-xl">CareerHub</a>
         </div>
         <div class="flex gap-2">
-          <input type="text" placeholder="Search" class="pl-2 border-2 border-gray-500 rounded w-24 md:w-auto" />
-          <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-              <div class="w-10 rounded-full border-2 border-gray-500 itmes-center justify-center flex">
-                <a class="items-center justify-center flex" href="">X</a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'createjob' %}" class="btn btn-white">Create Job</a>
+          {% else %}
+            <a href="{% url 'register' %}" class="btn btn-primary text-white">Register</a>
+            <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
+          {% endif %}
+          <form action="{% url 'home' %}" method="get" class="flex items-center">
+            <input type="text" name="query" value="{{ query|default:'' }}" placeholder="Search" class="pl-2 border-2 border-gray-500 rounded w-24 md:w-auto" />
+          </form>
+          {% if user.is_authenticated %}
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full border-2 border-gray-500 itmes-center justify-center flex">
+                  <span class="items-center justify-center flex">{{ user.username|first|upper }}</span>
+                </div>
               </div>
+              <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                <li>
+                  <!-- POST logout keeps Django's CSRF protection active. -->
+                  <form action="{% url 'logout_user' %}" method="post" class="w-full">
+                    {% csrf_token %}
+                    <button type="submit" class="block w-full px-4 py-2 text-left hover:bg-base-200 rounded-md">Logout</button>
+                  </form>
+                </li>
+              </ul>
             </div>
-            <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+          {% endif %}
         </div>
       </div>
     {% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Login - Job Board
+{% endblock %}
+{% block content %}
+  <section class="min-h-[calc(100vh-4rem)] bg-slate-50 px-4 py-12">
+    <div class="mx-auto grid max-w-5xl overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl md:grid-cols-2">
+      <div class="bg-slate-900 p-8 text-white md:p-10">
+        <a href="{% url 'home' %}" class="inline-flex items-center gap-2 text-lg font-bold">
+          <span class="material-icons-outlined text-indigo-300">work</span>
+          CareerHub
+        </a>
+        <div class="mt-16 max-w-sm">
+          <p class="text-sm font-semibold uppercase tracking-wide text-indigo-200">Welcome back</p>
+          <h1 class="mt-3 text-4xl font-bold">Sign in to manage your job posts.</h1>
+          <p class="mt-4 text-sm leading-6 text-slate-300">Post new openings, update company details, and keep your listings tidy from one simple dashboard.</p>
+        </div>
+      </div>
+
+      <div class="p-8 md:p-10">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-slate-900">Login</h2>
+          <p class="mt-2 text-sm text-slate-500">Use your account details to continue.</p>
+        </div>
+
+        <form method="post" class="space-y-5">
+          {% csrf_token %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          {% if form.errors %}
+            <div class="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">Please enter a correct username and password.</div>
+          {% endif %}
+          <input type="hidden" name="next" value="{{ next }}" />
+
+          <div>
+            <label for="username" class="mb-2 block text-sm font-semibold text-slate-700">Username</label>
+            <div class="relative">
+              <span class="material-icons-outlined pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[20px] leading-none text-slate-400">person</span>
+              <input type="text" id="username" name="username" class="h-12 w-full rounded-md border border-slate-300 bg-white pl-11 pr-4 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" required />
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="mb-2 block text-sm font-semibold text-slate-700">Password</label>
+            <div class="relative">
+              <span class="material-icons-outlined pointer-events-none absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[20px] leading-none text-slate-400">lock</span>
+              <input type="password" id="password" name="password" class="h-12 w-full rounded-md border border-slate-300 bg-white pl-11 pr-4 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" required />
+            </div>
+          </div>
+
+          <button type="submit" class="w-full rounded-md bg-indigo-600 px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-200">Login</button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-slate-500">
+          New to CareerHub?
+          <a href="{% url 'register' %}" class="font-semibold text-indigo-600 hover:text-indigo-700">Create an account</a>
+        </p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

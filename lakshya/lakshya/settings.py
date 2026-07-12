@@ -121,3 +121,7 @@ STATIC_URL = 'static/'
 # media configuration
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_URL='/accounts/login/'  # Redirect to login page if user is not authenticated
+LOGIN_REDIRECT_URL='/'  # Redirect to home page after successful login
+LOGOUT_REDIRECT_URL='/'  # Redirect to home page after logout
