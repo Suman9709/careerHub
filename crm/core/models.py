@@ -42,10 +42,7 @@ class Property(models.Model):
     def __str__(self):
         return self.title
 
-    pass
-
-
-
+    
 
 class Lead(models.Model):
     class LeadStatus(models.TextChoices):
@@ -91,6 +88,7 @@ class Deal(models.Model):
     commission_percentage = models.DecimalField(max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True) 
 
+ 
     def __str__(self):
         return f"deal: {self.lead.fullname} - {self.property.title}"
     
