@@ -15,7 +15,10 @@ def agents(request):
 
 
 def properties(request):
-    return render(request, 'pages/properties.html')
+    queryset = Property.objects.all()
+
+    context = {"propertys": queryset}
+    return render(request, 'pages/properties.html', context)
 
 def leads(request):
     return render(request, 'pages/leads.html')
