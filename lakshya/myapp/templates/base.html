@@ -46,8 +46,8 @@
             <a href="{% url 'register' %}" class="btn btn-primary text-white">Register</a>
             <a href="{% url 'login' %}" class="btn btn-ghost">Login</a>
           {% endif %}
-          <form action="{% url 'home' %}" method="get" class="flex items-center">
-            <input type="text" name="query" value="{{ query|default:'' }}" placeholder="Search" class="pl-2 border-2 border-gray-500 rounded w-24 md:w-auto" />
+          <form id="search-form" action="{% url 'home' %}" method="get" class="flex items-center">
+            <input id="search-input" type="search" name="query" value="{{ query|default:'' }}" placeholder="Search jobs" autocomplete="off" class="pl-2 border-2 border-gray-500 rounded w-24 md:w-auto" />
           </form>
           {% if user.is_authenticated %}
             <div class="dropdown dropdown-end">
@@ -76,5 +76,8 @@
 
       {% endblock %}
     </main>
+    {% block scripts %}
+
+    {% endblock %}
   </body>
 </html>

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
   Home - Job Board
 {% endblock %}
 {% block content %}
   <!-- Success Message -->
-  <section class="max-w-6xl mx-auto px-6 pb-16 mt-12">
+  <section id="job-results" class="max-w-6xl mx-auto px-6 pb-16 mt-12" aria-live="polite">
     {% if jobs %}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for job in jobs %}
-          <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-gray-200 overflow-hidden">
+          <div class="job-card bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-gray-200 overflow-hidden">
             <!-- Top -->
             <div class="bg-indigo-600 p-5 flex items-center gap-4">
               {% if job.logo %}
@@ -67,6 +68,10 @@
           </div>
         {% endfor %}
       </div>
+      <div id="no-search-results" class="hidden text-center py-24">
+        <span class="material-icons-outlined text-7xl text-gray-300">search_off</span>
+        <h2 class="text-2xl font-semibold text-gray-700 mt-4">No matching jobs</h2>
+      </div>
     {% else %}
       <div class="text-center py-24">
         <span class="material-icons-outlined text-7xl text-gray-300">work_off</span>
@@ -81,4 +86,8 @@
       </div>
     {% endif %}
   </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'live-search.js' %}" defer></script>
 {% endblock %}
