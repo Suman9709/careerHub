@@ -1,0 +1,61 @@
+<div class="drawer-side is-drawer-close:overflow-visible">
+        <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div class="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+          <!-- Sidebar content here -->
+          <ul class="menu w-full grow">
+            <!-- List item -->
+            <li class="mb-6">
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                <!-- Dashboard icon -->
+                <i class="ph ph-fill ph-buildings text-3xl"></i>
+                <span class="is-drawer-close:hidden text-2xl font-medium">RealtySphere</span>
+              </button>
+            </li>
+            <li>
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                <!-- Dashboard icon -->
+                <i class="ph ph-grid-four text-lg"></i>
+                <span class="is-drawer-close:hidden">Dashboard</span>
+              </button>
+            </li>
+
+            <li>
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                <!-- Lead icon -->
+                <i class="ph ph-fill ph-users-three text-xl"></i>
+                <span class="is-drawer-close:hidden">Lead</span>
+              </button>
+            </li>
+            <li>
+              <a href="{% url 'agents' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Agents">
+                <!-- Agent icon -->
+                <i class="ph ph-fill ph-user-circle text-xl"></i>
+                <span class="is-drawer-close:hidden">Agent</span>
+              </a>
+            </li>
+            <li>
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                <!-- Properties icon -->
+                <i class="ph ph-fill ph-buildings text-xl"></i>
+                <span class="is-drawer-close:hidden">Properties</span>
+              </button>
+            </li>
+            <li>
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+                <!-- Deals icon -->
+                <i class="ph ph-fill ph-handshake text-xl"></i>
+                <span class="is-drawer-close:hidden">Deals</span>
+              </button>
+            </li>
+
+            <!-- List item -->
+            <li>
+              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
+                <!-- Settings icon -->
+                <i class="ph ph-gear text-lg"></i>
+                <span class="is-drawer-close:hidden">Settings</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
