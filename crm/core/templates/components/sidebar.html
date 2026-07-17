@@ -5,26 +5,26 @@
           <ul class="menu w-full grow">
             <!-- List item -->
             <li class="mb-6">
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'home' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
                 <!-- Dashboard icon -->
                 <i class="ph ph-fill ph-buildings text-3xl"></i>
                 <span class="is-drawer-close:hidden text-2xl font-medium">RealtySphere</span>
-              </button>
+              </a>
             </li>
             <li>
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'home' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
                 <!-- Dashboard icon -->
                 <i class="ph ph-grid-four text-lg"></i>
                 <span class="is-drawer-close:hidden">Dashboard</span>
-              </button>
+              </a>
             </li>
 
             <li>
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'leads' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Leads">
                 <!-- Lead icon -->
                 <i class="ph ph-fill ph-users-three text-xl"></i>
                 <span class="is-drawer-close:hidden">Lead</span>
-              </button>
+              </a>
             </li>
             <li>
               <a href="{% url 'agents' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Agents">
@@ -34,18 +34,18 @@
               </a>
             </li>
             <li>
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'properties' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Properties">
                 <!-- Properties icon -->
                 <i class="ph ph-fill ph-buildings text-xl"></i>
                 <span class="is-drawer-close:hidden">Properties</span>
-              </button>
+              </a>
             </li>
             <li>
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'deals' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Deals">
                 <!-- Deals icon -->
                 <i class="ph ph-fill ph-handshake text-xl"></i>
                 <span class="is-drawer-close:hidden">Deals</span>
-              </button>
+              </a>
             </li>
 
             <!-- List item -->

@@ -1,0 +1,18 @@
+<div class="flex flex-wrap justify-start gap-4">
+  {% for agent in agents %}
+    <div class="max-w-lg w-full bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-">
+      <div class="flex items-start justify-between mb-3">
+        <div class="flex items-center space-x-3">
+          <a href="" target="_blank" rel="noopener noreferrer" class="flex-shrink-0"><img src="{{ agent.profile_picture.url }}" alt="" class="w-12 h-12 rounded-full object-cover border border-gray-200" /></a>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center space-x-1">
+              <a href="" target="_blank" rel="noopener noreferrer" class="font-bold text-gray-900 hover:underline truncate">{{ agent.user.first_name }}</a>
+            </div>
+            <a href="" target="_blank" rel="noopener noreferrer" class="text-gray-500 text-sm hover:underline">@{{ agent.user.username }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-gray-500 text-xs">{{ agent.created_at }}</div>
+    </div>
+  {% endfor %}
+</div>

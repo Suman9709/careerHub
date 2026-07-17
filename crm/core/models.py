@@ -1,13 +1,17 @@
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 class Agent(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE) # prefer to use get_user_model() instead of User model directly
+    profile_picture = models.ImageField(upload_to='profile', default='profile/default.jpg')
     phone_number = models.CharField(max_length=10)
     region = models.CharField(max_length=50)
     commission_share = models.DecimalField(max_digits=4, decimal_places=2)
     monthly_target = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"agent: {self.user.username}"
