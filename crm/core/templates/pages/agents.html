@@ -2,6 +2,16 @@
 {% block title %}
   <h1>Agents</h1>
 {% endblock %}
+
+{% block formtitle %}
+  <h1>Add Agent</h1>
+{% endblock %}
+
+{% block formcontent %}
+  {{form}}
+{% endblock %}
+
+
 {% block content %}
   {% include 'components/agentscontainer.html' %}
 {% endblock %}

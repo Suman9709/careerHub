@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.contrib.humanize.templatetags.humanize import intword
 
 # Create your models here.
 class Agent(models.Model):
@@ -75,6 +76,13 @@ class Lead(models.Model):
 
     def __str__(self):
         return f"lead: {self.fullname}"
+    
+    def get_budget_range(self):
+        start = intword(self.min_budget).split(" ")[0]
+        end = intword(self.max_budget).split(" ")[0]
+        unit = intword(self.max_budget).split(" ")[-1]
+      
+        return f"{start} - {end} {unit}"
 
 
 class Deal(models.Model):

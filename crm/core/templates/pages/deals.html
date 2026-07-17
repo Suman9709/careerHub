@@ -4,7 +4,14 @@
   Deals
 {% endblock %}
 
+{% block formtitle %}
+  New Deal
+{% endblock %}
+
+{% block formcontent %}
+  {{form}}
+{% endblock %}
+
 {% block content %}
-  <h1>Deals</h1>
-  <p>This is the deals page.</p>
+  {% include 'components/dealscontainer.html' %}
 {% endblock %}

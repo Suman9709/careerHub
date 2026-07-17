@@ -21,15 +21,15 @@
     {% comment %}phosphor icons{% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
 
-  <title>My CRM</title>
+    <title>My CRM</title>
   </head>
   <body bg-gray-50 text-base-content min-h-screen>
     <div class="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content">
         <!-- Navbar -->
-        <nav class="navbar w-full bg-base-300">
-          <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
+        <nav class="navbar w-full bg-[#0f172a] text-white px-4 py-2 shadow-md">
+          <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square text-white btn-outline">
             <!-- Sidebar toggle icon -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4">
               <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
@@ -40,8 +40,30 @@
           <div class="px-4">
             {% block title %}
 
-            
             {% endblock %}
+          </div>
+
+          <!-- Open the modal using ID.showModal() method -->
+          <div class="flex justify-end grow">
+            <button class="btn btn-primary px-10" onclick="my_modal_1.showModal()">Add</button>
+            <dialog id="my_modal_1" class="modal text-black">
+              <div class="modal-box">
+                <h3 class="text-lg font-bold">
+                  {% block formtitle %}
+
+                  {% endblock %}
+                </h3>
+                {% block formcontent %}
+
+                {% endblock %}
+                <div class="modal-action">
+                  <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
           </div>
         </nav>
         <!-- Page content here -->

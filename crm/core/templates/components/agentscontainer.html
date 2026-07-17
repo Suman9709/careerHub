@@ -23,9 +23,9 @@
             <!-- Profile Header -->
             <div class="flex items-center gap-4">
               <div class="relative shrink-0">
-                <img src="{{ agent.profile_picture.url }}" alt="{{ agent.user.username }}" class="h-16 w-16 rounded-full border-2 border-white object-cover shadow-md ring-2 ring-indigo-100" />
+                <img src="{{ agent.profile_picture.url }}" alt="{{ agent.user.username }}" class="h-20 w-20 rounded-full object-cover object-top border-2 border-white shadow-lg ring-2 ring-indigo-100" />
 
-                <span class="absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-white bg-emerald-500" title="Active agent"></span>
+                <span class="absolute bottom-1 right-1 h-4 w-4 rounded-full bg-emerald-500 border-2 border-white"></span>
               </div>
 
               <div class="min-w-0">
@@ -71,11 +71,9 @@
 
               <div>
                 <p class="text-xs text-gray-400">Monthly target</p>
-                <p class="mt-1 text-lg font-bold text-indigo-600">₹{{ agent.monthly_target| intword }}</p>
+                <p class="mt-1 text-lg font-bold text-indigo-600">₹{{ agent.monthly_target|intword }}</p>
               </div>
             </div>
-
-           
           </article>
         {% endfor %}
       </div>

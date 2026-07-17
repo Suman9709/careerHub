@@ -2,7 +2,15 @@
 
 {% block title %}Leads{% endblock %}
 
+{% block formtitle%}Add Lead {% endblock %}
+
+
+{% block formcontent %}
+  <!-- Form content for adding a new lead -->
+   {{form}}
+{% endblock %}
 {% block content %}
-<h1>Leads</h1>
-<p>This is the leads page.</p>
+
+
+{% include 'components/leadscontainer.html' %}
 {% endblock %}

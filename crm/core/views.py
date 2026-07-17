@@ -1,13 +1,18 @@
 from django.shortcuts import render
-from .models import Agent, Property, Lead
+
+from .forms import AgentForm, PropertyForm, LeadForm, DealForm
+from .models import Agent, Property, Lead, Deal
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
 
 def agents(request):
-    queryset = Agent.objects.all()
+    form = AgentForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
 
-    context = {'agents': queryset}
+    queryset = Agent.objects.all()
+    context = {'agents': queryset, "form":form}
     for agent in queryset:
         print(agent.user.first_name)
     return render(request, 'pages/agents.html', context)
@@ -15,13 +20,29 @@ def agents(request):
 
 
 def properties(request):
-    queryset = Property.objects.all()
+    form = PropertyForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
 
-    context = {"propertys": queryset}
+    queryset = Property.objects.all()
+    context = {"propertys": queryset, "form": form}
     return render(request, 'pages/properties.html', context)
 
 def leads(request):
-    return render(request, 'pages/leads.html')
+    form = LeadForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+
+    queryset = Lead.objects.all()
+    context = {"leads": queryset, "form": form}
+    return render(request, 'pages/leads.html', context)
 
 def deals(request):
-    return render(request, 'pages/deals.html')
+    form = DealForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+
+    queryset = Deal.objects.all()
+
+    context = {"deals": queryset, "form": form}
+    return render(request, 'pages/deals.html', context)

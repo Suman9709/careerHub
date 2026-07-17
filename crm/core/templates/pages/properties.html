@@ -2,6 +2,13 @@
 
 {% block title %}Properties{% endblock %}
 
+{% block formtitle%}Add Property {% endblock %}
+
+{% block formcontent %}
+  <!-- Form content for adding a new property -->
+   {{form}}
+{% endblock %}
+
 {% block content %}
 {% include 'components/propertiescontainer.html' %}
 {% endblock %}
