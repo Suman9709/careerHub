@@ -4,12 +4,18 @@
   Deals
 {% endblock %}
 
+{% block subtitle %}Monitor active deals, closing dates, amounts, and commissions.{% endblock %}
+
+{% block add_button_label %}Add Deal{% endblock %}
+
+{% block search_placeholder %}Search deals{% endblock %}
+
 {% block formtitle %}
   New Deal
 {% endblock %}
 
 {% block formcontent %}
-  {{form}}
+  {{ form.as_p }}
 {% endblock %}
 
 {% block content %}

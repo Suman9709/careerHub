@@ -1,18 +1,18 @@
-<div class="drawer-side is-drawer-close:overflow-visible">
+<div class="drawer-side z-50 is-drawer-close:overflow-visible">
         <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
-        <div class=" bg-[#0f172a] text-white flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
+        <div class="flex min-h-full flex-col items-start bg-[#0f172a] text-white shadow-2xl is-drawer-close:w-14 is-drawer-open:w-64">
           <!-- Sidebar content here -->
-          <ul class="menu w-full grow">
+          <ul class="menu w-full grow gap-1 p-3">
             <!-- List item -->
-            <li class="mb-6">
-              <a href="{% url 'home' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+            <li class="mb-5">
+              <a href="{% url 'home' %}" class="rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
                 <!-- Dashboard icon -->
                 <i class="ph ph-fill ph-buildings text-yellow-500 text-3xl"></i>
                 <span class="is-drawer-close:hidden text-2xl font-medium">RealtySphere</span>
               </a>
             </li>
             <li>
-              <a href="{% url 'home' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
+              <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}bg-white/15 text-white{% endif %} rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
                 <!-- Dashboard icon -->
                 <i class="ph ph-grid-four text-lg"></i>
                 <span class="is-drawer-close:hidden">Dashboard</span>
@@ -20,28 +20,28 @@
             </li>
 
             <li>
-              <a href="{% url 'leads' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Leads">
+              <a href="{% url 'leads' %}" class="{% if request.resolver_match.url_name == 'leads' %}bg-white/15 text-white{% endif %} rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Leads">
                 <!-- Lead icon -->
                 <i class="ph ph-fill ph-users-three text-xl"></i>
-                <span class="is-drawer-close:hidden">Lead</span>
+                <span class="is-drawer-close:hidden">Leads</span>
               </a>
             </li>
             <li>
-              <a href="{% url 'agents' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Agents">
+              <a href="{% url 'agents' %}" class="{% if request.resolver_match.url_name == 'agents' %}bg-white/15 text-white{% endif %} rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Agents">
                 <!-- Agent icon -->
                 <i class="ph ph-fill ph-user-circle text-xl"></i>
-                <span class="is-drawer-close:hidden">Agent</span>
+                <span class="is-drawer-close:hidden">Agents</span>
               </a>
             </li>
             <li>
-              <a href="{% url 'properties' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Properties">
+              <a href="{% url 'properties' %}" class="{% if request.resolver_match.url_name == 'properties' %}bg-white/15 text-white{% endif %} rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Properties">
                 <!-- Properties icon -->
                 <i class="ph ph-fill ph-buildings text-xl"></i>
                 <span class="is-drawer-close:hidden">Properties</span>
               </a>
             </li>
             <li>
-              <a href="{% url 'deals' %}" class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Deals">
+              <a href="{% url 'deals' %}" class="{% if request.resolver_match.url_name == 'deals' %}bg-white/15 text-white{% endif %} rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Deals">
                 <!-- Deals icon -->
                 <i class="ph ph-fill ph-handshake text-xl"></i>
                 <span class="is-drawer-close:hidden">Deals</span>
@@ -49,8 +49,8 @@
             </li>
 
             <!-- List item -->
-            <li>
-              <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
+            <li class="mt-auto">
+              <button class="rounded-xl hover:bg-white/10 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
                 <!-- Settings icon -->
                 <i class="ph ph-gear text-lg"></i>
                 <span class="is-drawer-close:hidden">Settings</span>

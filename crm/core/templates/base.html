@@ -17,64 +17,121 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <link rel="stylesheet" href="{% static 'global.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'global.css' %}?v=crm-form-3" type="text/css" />
     {% comment %}phosphor icons{% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css" />
 
-    <title>My CRM</title>
+    <title>RealtySphere CRM</title>
   </head>
-  <body bg-gray-50 text-base-content min-h-screen>
+  <body class="min-h-screen bg-slate-50 text-base-content">
     <div class="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content">
         <!-- Navbar -->
-        <nav class="navbar w-full bg-[#0f172a] text-white px-4 py-2 shadow-md">
-          <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square text-white btn-outline">
+        <nav class="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-3 text-slate-900 shadow-sm backdrop-blur">
+          <div class="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex min-w-0 items-center gap-3">
+          <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost border border-slate-200 text-slate-700 lg:hidden">
             <!-- Sidebar toggle icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4">
-              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-              <path d="M9 4v16"></path>
-              <path d="M14 10l2 2l-2 2"></path>
-            </svg>
+            <i class="ph ph-sidebar-simple text-xl"></i>
           </label>
-          <div class="px-4">
-            {% block title %}
-
-            {% endblock %}
+          <div class="min-w-0">
+            <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">RealtySphere CRM</p>
+            <h1 class="truncate text-2xl font-bold tracking-tight text-slate-950">
+              {% block title %}Dashboard{% endblock %}
+            </h1>
+            <p class="mt-1 text-sm text-slate-500">
+              {% block subtitle %}Manage agents, leads, properties, and deals from one workspace.{% endblock %}
+            </p>
           </div>
+            </div>
+
+          <div class="flex w-full flex-col gap-2 lg:w-auto lg:flex-row lg:items-center lg:justify-end">
+            <form id="global-search-form" role="search" class="relative w-full lg:w-72">
+              <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400"></i>
+              <input
+                id="global-search-input"
+                type="search"
+                placeholder="{% block search_placeholder %}Search CRM{% endblock %}"
+                autocomplete="off"
+                class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-800 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10"
+              />
+            </form>
 
           <!-- Open the modal using ID.showModal() method -->
-          <div class="flex justify-end grow">
-            <button class="btn btn-primary px-10" onclick="my_modal_1.showModal()">Add</button>
+          <div class="flex flex-wrap items-center justify-start gap-2 lg:justify-end">
+            <a href="{% url 'agents' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-user-plus"></i> Agent</a>
+            <a href="{% url 'leads' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-user-list"></i> Lead</a>
+            <a href="{% url 'properties' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-house-line"></i> Property</a>
+            <a href="{% url 'deals' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-handshake"></i> Deal</a>
+            {% block primary_action %}
+              <button class="btn btn-primary btn-sm px-5" onclick="my_modal_1.showModal()">
+                <i class="ph ph-plus-circle text-lg"></i>
+                {% block add_button_label %}Add New{% endblock %}
+              </button>
+            {% endblock %}
             <dialog id="my_modal_1" class="modal text-black">
-              <div class="modal-box">
-                <h3 class="text-lg font-bold">
-                  {% block formtitle %}
+              <div class="modal-box flex max-h-[90vh] max-w-3xl flex-col overflow-hidden rounded-2xl p-0">
+                <div class="shrink-0 border-b border-slate-200 bg-slate-50 px-5 py-4 sm:px-6">
+                  <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Create Record</p>
+                  <h3 class="mt-1 text-xl font-bold text-slate-950">
+                    {% block formtitle %}
 
-                  {% endblock %}
-                </h3>
-                {% block formcontent %}
+                    {% endblock %}
+                  </h3>
+                </div>
 
-                {% endblock %}
-                <div class="modal-action">
-                  <form method="dialog">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button class="btn">Close</button>
+                <div class="min-h-0">
+                  <form method="post" enctype="multipart/form-data" class="crm-form flex max-h-[calc(90vh-92px)] w-full flex-col">
+                    {% csrf_token %}
+                    <div class="crm-form-body">
+                      <div class="crm-form-grid">
+                        {% block formcontent %}
+
+                        {% endblock %}
+                      </div>
+                    </div>
+                    <div class="crm-form-actions">
+                      <button class="btn btn-ghost border border-slate-200" type="button" onclick="my_modal_1.close()">Close</button>
+                      <button class="btn btn-primary" type="submit">
+                        <i class="ph ph-check-circle text-lg"></i>
+                        Save
+                      </button>
+                    </div>
                   </form>
                 </div>
               </div>
             </dialog>
           </div>
+          </div>
         </nav>
         <!-- Page content here -->
-        <div class="p-4">
+        <main class="p-4 sm:p-6">
           {% block content %}
 
           {% endblock %}
-        </div>
+        </main>
       </div>
 
       {% include 'components/sidebar.html' %}
     </div>
+    <script>
+      const searchForm = document.getElementById('global-search-form');
+      const searchInput = document.getElementById('global-search-input');
+
+      if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', (event) => event.preventDefault());
+
+        searchInput.addEventListener('input', () => {
+          const query = searchInput.value.trim().toLowerCase();
+          const items = document.querySelectorAll('[data-search-item]');
+
+          items.forEach((item) => {
+            const text = item.textContent.toLowerCase();
+            item.hidden = query !== '' && !text.includes(query);
+          });
+        });
+      }
+    </script>
   </body>
 </html>

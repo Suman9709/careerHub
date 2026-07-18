@@ -2,12 +2,17 @@
 
 {% block title %}Leads{% endblock %}
 
+{% block subtitle %}Capture buyers, track their budgets, and assign agents quickly.{% endblock %}
+
+{% block add_button_label %}Add Lead{% endblock %}
+
+{% block search_placeholder %}Search leads{% endblock %}
+
 {% block formtitle%}Add Lead {% endblock %}
 
 
 {% block formcontent %}
-  <!-- Form content for adding a new lead -->
-   {{form}}
+  {{ form.as_p }}
 {% endblock %}
 {% block content %}
 

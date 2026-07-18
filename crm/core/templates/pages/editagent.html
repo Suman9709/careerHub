@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Edit Agent
+{% endblock %}
+
+{% block subtitle %}Update agent profile, region, commission, and target details.{% endblock %}
+
+{% block primary_action %}{% endblock %}
+
+{% block search_placeholder %}Search before editing{% endblock %}
+
+{% block content %}
+  <section class="mx-auto max-w-3xl">
+    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="border-b border-slate-200 bg-slate-50 px-5 py-5 sm:px-7">
+        <p class="text-sm font-semibold uppercase tracking-wider text-indigo-600">Agent Profile</p>
+        <h2 class="mt-1 text-2xl font-bold text-slate-950">Edit {{ agent.user.get_full_name|default:agent.user.username }}</h2>
+        <p class="mt-1 text-sm text-slate-500">Keep the agent information accurate for assignments and reporting.</p>
+      </div>
+
+      <form method="post" enctype="multipart/form-data" class="crm-form p-5 sm:p-7">
+        {% csrf_token %}
+        <div class="crm-form-grid">
+          {{ form.as_p }}
+        </div>
+
+        <div class="crm-form-actions -mx-5 -mb-5 mt-7 sm:-mx-7 sm:-mb-7">
+          <a href="{% url 'agents' %}" class="btn btn-ghost border border-slate-200">Cancel</a>
+          <button type="submit" class="btn btn-primary">
+            <i class="ph ph-check-circle text-lg"></i>
+            Update Agent
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

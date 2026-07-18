@@ -15,7 +15,7 @@ class Agent(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"agent: {self.user.username}"
+        return self.user.get_full_name() or self.user.username
 
 
 
@@ -33,8 +33,8 @@ class Property(models.Model):
 
 
     title= models.CharField(max_length = 255)
-    description = models.TextField(max_length = 255)
-    address = models.TextField(max_length = 255)
+    description = models.CharField(max_length = 255)
+    address = models.CharField(max_length = 255)
     city = models.CharField(max_length = 255)
     property_type = models.CharField(max_length = 255, choices=PropertyType.choices)
     price = models.DecimalField(max_digits=12, decimal_places=2)

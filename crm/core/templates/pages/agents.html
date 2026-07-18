@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}
-  <h1>Agents</h1>
+  Agents
 {% endblock %}
+
+{% block subtitle %}Manage your sales team, regions, targets, and commission shares.{% endblock %}
+
+{% block add_button_label %}Add Agent{% endblock %}
+
+{% block search_placeholder %}Search agents{% endblock %}
 
 {% block formtitle %}
   <h1>Add Agent</h1>
 {% endblock %}
 
 {% block formcontent %}
-  {{form}}
+  {{ form.as_p }}
 {% endblock %}
 
 

@@ -2,11 +2,16 @@
 
 {% block title %}Properties{% endblock %}
 
+{% block subtitle %}Add listings, review availability, and keep property details fresh.{% endblock %}
+
+{% block add_button_label %}Add Property{% endblock %}
+
+{% block search_placeholder %}Search properties{% endblock %}
+
 {% block formtitle%}Add Property {% endblock %}
 
 {% block formcontent %}
-  <!-- Form content for adding a new property -->
-   {{form}}
+  {{ form.as_p }}
 {% endblock %}
 
 {% block content %}
