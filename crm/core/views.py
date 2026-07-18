@@ -197,7 +197,11 @@ def deals(request):
             | Q(lead__assigned_agent__user__username__icontains=query)
         )
 
-    context = {"deals": queryset, "form": form}
+    context = {
+        "deals": queryset,
+        "form": form,
+        "deal_status": Deal.DealStatus.choices,
+    }
     return render(request, 'pages/deals.html', context)
 
 
@@ -215,4 +219,14 @@ def edit_deal(request, deal_id):
 def delete_deal(request, deal_id):
     deal = get_object_or_404(Deal, id=deal_id)
     deal.delete()
+    return redirect('deals')
+
+@require_POST
+def deal_status_update(request, deal_id):
+    status = request.POST.get('status')
+    deal = get_object_or_404(Deal, id=deal_id)
+    valid_statuses = [value for value, label in Deal.DealStatus.choices]
+    if status in valid_statuses:
+        deal.status = status
+        deal.save()
     return redirect('deals')

@@ -15,7 +15,6 @@
     </style>
     {% comment %}Daisyui{% endcomment %}
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="{% static 'global.css' %}?v=crm-form-3" type="text/css" />
     {% comment %}phosphor icons{% endcomment %}
@@ -31,80 +30,81 @@
         <nav class="sticky top-0 z-10 border-b border-slate-200 bg-white/95 px-4 py-3 text-slate-900 shadow-sm backdrop-blur">
           <div class="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div class="flex min-w-0 items-center gap-3">
-          <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost border border-slate-200 text-slate-700 lg:hidden">
-            <!-- Sidebar toggle icon -->
-            <i class="ph ph-sidebar-simple text-xl"></i>
-          </label>
-          <div class="min-w-0">
-            <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">RealtySphere CRM</p>
-            <h1 class="truncate text-2xl font-bold tracking-tight text-slate-950">
-              {% block title %}Dashboard{% endblock %}
-            </h1>
-            <p class="mt-1 text-sm text-slate-500">
-              {% block subtitle %}Manage agents, leads, properties, and deals from one workspace.{% endblock %}
-            </p>
-          </div>
+              <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost border border-slate-200 text-slate-700 lg:hidden"><i class="ph ph-sidebar-simple text-xl"></i></label>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">RealtySphere CRM</p>
+                <h1 class="truncate text-2xl font-bold tracking-tight text-slate-950">
+                  {% block title %}
+                    Dashboard
+                  {% endblock %}
+                </h1>
+                <p class="mt-1 text-sm text-slate-500">
+                  {% block subtitle %}
+                    Manage agents, leads, properties, and deals from one workspace.
+                  {% endblock %}
+                </p>
+              </div>
             </div>
 
-          <div class="flex w-full flex-col gap-2 lg:w-auto lg:flex-row lg:items-center lg:justify-end">
-            <form id="global-search-form" role="search" class="relative w-full lg:w-72">
-              <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400"></i>
-              <input
-                id="global-search-input"
-                type="search"
-                placeholder="{% block search_placeholder %}Search CRM{% endblock %}"
-                autocomplete="off"
-                class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-800 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10"
-              />
-            </form>
+            <div class="flex w-full flex-col gap-2 lg:w-auto lg:flex-row lg:items-center lg:justify-end">
+              <form id="global-search-form" role="search" class="relative w-full lg:w-72">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-lg text-slate-400"></i>
+                <input id="global-search-input"
+                  name="q"
+                  type="search"
+                  placeholder="{% block search_placeholder %}
+                    Search CRM
+                  {% endblock %}"
+                  value="{{ request.GET.q }}"
+                  autocomplete="off"
+                  class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-800 outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-500/10" />
+              </form>
 
-          <!-- Open the modal using ID.showModal() method -->
-          <div class="flex flex-wrap items-center justify-start gap-2 lg:justify-end">
-            <a href="{% url 'agents' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-user-plus"></i> Agent</a>
-            <a href="{% url 'leads' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-user-list"></i> Lead</a>
-            <a href="{% url 'properties' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-house-line"></i> Property</a>
-            <a href="{% url 'deals' %}" class="btn btn-sm btn-ghost border border-slate-200 text-slate-700"><i class="ph ph-handshake"></i> Deal</a>
-            {% block primary_action %}
-              <button class="btn btn-primary btn-sm px-5" onclick="my_modal_1.showModal()">
-                <i class="ph ph-plus-circle text-lg"></i>
-                {% block add_button_label %}Add New{% endblock %}
-              </button>
-            {% endblock %}
-            <dialog id="my_modal_1" class="modal text-black">
-              <div class="modal-box flex max-h-[90vh] max-w-3xl flex-col overflow-hidden rounded-2xl p-0">
-                <div class="shrink-0 border-b border-slate-200 bg-slate-50 px-5 py-4 sm:px-6">
-                  <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Create Record</p>
-                  <h3 class="mt-1 text-xl font-bold text-slate-950">
-                    {% block formtitle %}
-
+              <div class="flex flex-wrap items-center justify-start gap-2 lg:justify-end">
+                {% block primary_action %}
+                  <button class="btn btn-primary btn-sm px-5" type="button" onclick="my_modal_1.showModal()">
+                    <i class="ph ph-plus-circle text-lg"></i>
+                    {% block add_button_label %}
+                      Add New
                     {% endblock %}
-                  </h3>
-                </div>
-
-                <div class="min-h-0">
-                  <form method="post" enctype="multipart/form-data" class="crm-form flex max-h-[calc(90vh-92px)] w-full flex-col">
-                    {% csrf_token %}
-                    <div class="crm-form-body">
-                      <div class="crm-form-grid">
-                        {% block formcontent %}
-
-                        {% endblock %}
-                      </div>
-                    </div>
-                    <div class="crm-form-actions">
-                      <button class="btn btn-ghost border border-slate-200" type="button" onclick="my_modal_1.close()">Close</button>
-                      <button class="btn btn-primary" type="submit">
-                        <i class="ph ph-check-circle text-lg"></i>
-                        Save
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                  </button>
+                {% endblock %}
               </div>
-            </dialog>
-          </div>
+            </div>
           </div>
         </nav>
+        <dialog id="my_modal_1" class="modal text-black">
+          <div class="modal-box flex max-h-[90vh] max-w-3xl flex-col overflow-hidden rounded-2xl p-0">
+            <div class="shrink-0 border-b border-slate-200 bg-slate-50 px-5 py-4 sm:px-6">
+              <p class="text-xs font-bold uppercase tracking-wider text-indigo-600">Create Record</p>
+              <h3 class="mt-1 text-xl font-bold text-slate-950">
+                {% block formtitle %}
+
+                {% endblock %}
+              </h3>
+            </div>
+
+            <div class="min-h-0">
+              <form method="post" enctype="multipart/form-data" class="crm-form flex max-h-[calc(90vh-92px)] w-full flex-col">
+                {% csrf_token %}
+                <div class="crm-form-body">
+                  <div class="crm-form-grid">
+                    {% block formcontent %}
+
+                    {% endblock %}
+                  </div>
+                </div>
+                <div class="crm-form-actions">
+                  <button class="btn btn-ghost border border-slate-200" type="button" onclick="my_modal_1.close()">Close</button>
+                  <button class="btn btn-primary" type="submit">
+                    <i class="ph ph-check-circle text-lg"></i>
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </dialog>
         <!-- Page content here -->
         <main class="p-4 sm:p-6">
           {% block content %}
@@ -116,21 +116,19 @@
       {% include 'components/sidebar.html' %}
     </div>
     <script>
-      const searchForm = document.getElementById('global-search-form');
-      const searchInput = document.getElementById('global-search-input');
-
+      const searchForm = document.getElementById('global-search-form')
+      const searchInput = document.getElementById('global-search-input')
+      
       if (searchForm && searchInput) {
-        searchForm.addEventListener('submit', (event) => event.preventDefault());
-
         searchInput.addEventListener('input', () => {
-          const query = searchInput.value.trim().toLowerCase();
-          const items = document.querySelectorAll('[data-search-item]');
-
+          const query = searchInput.value.trim().toLowerCase()
+          const items = document.querySelectorAll('[data-search-item]')
+      
           items.forEach((item) => {
-            const text = item.textContent.toLowerCase();
-            item.hidden = query !== '' && !text.includes(query);
-          });
-        });
+            const text = item.textContent.toLowerCase()
+            item.hidden = query !== '' && !text.includes(query)
+          })
+        })
       }
     </script>
   </body>
